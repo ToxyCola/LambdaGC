@@ -1,0 +1,3 @@
+numpy>=1.22
+scipy>=1.8   # prop collision hulls, voice resampling
+pillow>=9   # caption font atlas, preview.py

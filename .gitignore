@@ -1,0 +1,12 @@
+# converted game data is never committed: every player builds their own
+disc/
+*.iso
+*.hgm
+vo.bin
+engine/build/
+engine/*.elf
+engine/*.dol
+engine/*.map
+__pycache__/
+test/gxv/inc/
+test/hostinc/
