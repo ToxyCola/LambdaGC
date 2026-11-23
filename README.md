@@ -14,32 +14,37 @@ installed copy of Half-Life 2 on your own computer.
 
 ## Requirements
 
-- **Half-Life 2 on Steam, on the `steam_legacy` branch (required).** The converter only understands the
-  pre-20th Anniversary version of the game's files. In Steam: right-click *Half-Life 2* → *Properties* →
-  *Betas* → choose **`steam_legacy`** and let it finish downloading. The builder checks this and stops
-  if Half-Life 2 is on any other branch.
-- **Python 3.8+** with `numpy`, `scipy` and `pillow` (the builder installs them with pip if they're missing).
-- **devkitPro** with GameCube development (devkitPPC + libogc), from
-  <https://github.com/devkitPro/installer/releases> (tick "GameCube development"), or
-  `dkp-pacman -S gamecube-dev` on Linux/macOS.
-- **ffmpeg** on the PATH (optional): decodes the Valve startup movie. Without it the movie is skipped.
-- About 3 GB of free disk space. Converting all 75 maps takes roughly 20–40 minutes.
+- **Half-Life 2 on Steam, on the `steam_legacy` branch.** This is the only thing you need to provide. The converter
+  only understands the pre-20th Anniversary version of the game's files. In Steam: right-click *Half-Life 2* →
+  *Properties* → *Betas* → choose **`steam_legacy`** and let it finish downloading. The builder checks this and
+  stops if Half-Life 2 is on any other branch.
+- An internet connection the first time (about 200 MB of tools are downloaded) and about 4 GB of free disk space.
+
+Everything else is fetched and set up automatically, inside a `.tools` folder next to the builder. Nothing is
+installed system-wide, and deleting the folder removes it all:
+
+- **Python** (Windows only: a private copy of Python 3.13 from python.org; on Linux/macOS the system's Python 3 is
+  used, and `build.sh` installs it with your package manager if it's missing)
+- **numpy, scipy, pillow, zstandard** and **imageio-ffmpeg** (which brings ffmpeg, to decode the startup movie)
+- **devkitPro's GameCube toolchain** (devkitPPC, libogc, libfat, gamecube-tools), downloaded from devkitPro's
+  own package server and checked against its SHA-256 sums
 
 ## Building
 
 Windows: double-click **`build.bat`**. Linux / macOS: run **`./build.sh`**.
 
-The builder:
+That's all. The builder:
 
-1. finds Half-Life 2 in your Steam libraries (or use `--hl2 "<...>/steamapps/common/Half-Life 2"`),
-2. checks that it's on the `steam_legacy` branch,
-3. converts the game into `disc/files/hl2gc/`,
-4. compiles the engine and the disc's apploader with devkitPro,
+1. finds Half-Life 2 in your Steam libraries and checks that it's on the `steam_legacy` branch,
+2. sets up the prerequisites above (only the first time),
+3. converts the game into `disc/files/hl2gc/` (roughly 20–40 minutes),
+4. compiles the engine and the disc's apploader,
 5. writes **`LambdaGC.iso`**.
 
-Options: `--skip-convert` (reuse the converted files), `--skip-engine`, `--maps d1_trainstation_01 ...`
-(convert only some maps), `--windows-fonts C:\Windows\Fonts` (the PC version's menu fonts),
-`--out <file.iso>`. Run `python build.py --help` for the full list.
+Options (rarely needed): `--hl2 "<...>/steamapps/common/Half-Life 2"` if Half-Life 2 isn't found
+automatically, `--system-devkitpro` to use a devkitPro install you already have, `--skip-convert` /
+`--skip-engine` to redo only one half, `--maps d1_trainstation_01 ...` to convert only some maps. Run
+`build.bat --help` (or `./build.sh --help`) for the full list.
 
 ## Running
 

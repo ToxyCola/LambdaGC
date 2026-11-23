@@ -10,3 +10,4 @@ engine/*.map
 __pycache__/
 test/gxv/inc/
 test/hostinc/
+.tools/

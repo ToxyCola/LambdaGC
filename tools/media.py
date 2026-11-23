@@ -28,9 +28,16 @@ RATE = 32000
 
 
 def _ffmpeg():
-    exe = shutil.which("ffmpeg")
+    # the builder's own copy (LAMBDAGC_FFMPEG), one on the PATH, or the one imageio-ffmpeg carries
+    exe = os.environ.get("LAMBDAGC_FFMPEG") or shutil.which("ffmpeg")
     if not exe:
-        raise RuntimeError("ffmpeg isn't on the PATH (needed to decode the startup movie)")
+        try:
+            import imageio_ffmpeg
+            exe = imageio_ffmpeg.get_ffmpeg_exe()
+        except Exception:
+            exe = None
+    if not exe:
+        raise RuntimeError("no ffmpeg found (needed to decode the startup movie)")
     return exe
 
 
