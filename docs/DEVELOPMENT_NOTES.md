@@ -1,4 +1,4 @@
-> **Note:** these are the original development notes, kept for reference. Paths and some tools mentioned here (the Dolphin debugging bridge, the menu button artwork, `hl2gc.iso`) are not part of this repository; see README.md for how to build.
+> **Note:** these are the original development notes, kept for reference. Paths and some tools mentioned here (the Dolphin debugging bridge, `hl2gc.iso`) are not part of this repository; see README.md for how to build.
 
 # hl2gc — Half-Life 2 on the Nintendo GameCube
 

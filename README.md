@@ -75,6 +75,7 @@ build.py, build.bat, build.sh   the builder
 engine/source/                  the GameCube engine (C, libogc)
 engine/apploader/               the disc's apploader
 tools/                          the converter (Python) and the disc image writer
+tools/assets/                   the project's own GameCube A / B button icons for the menu
 test/                           host-side tests (see test/bt.sh; they need libogc's headers in test/gxv/inc,
                                 made with test/gxv/make_inc.py)
 docs/DEVELOPMENT_NOTES.md       the original development notes
